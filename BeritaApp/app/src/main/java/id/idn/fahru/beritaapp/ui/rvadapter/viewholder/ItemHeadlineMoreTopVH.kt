@@ -63,9 +63,9 @@ class ItemHeadlineMoreTopVH(private val binding: ItemHeadlineMoreTopBinding) :
             visibility = View.VISIBLE
         }
         txtTitle.text =
-            (if (countryNewsTag.newsTag == "") countryNewsTag.newsTag else App.context.resources.getText(
+            (if (countryNewsTag.newsTag.isEmpty()) App.context.resources.getText(
                 R.string.text_headlines
-            ) as String).toUpperCase(Locale.getDefault())
+            ) as String else countryNewsTag.newsTag).toUpperCase(Locale.getDefault())
         btnMore.root.visibility = View.VISIBLE
     }
 }
