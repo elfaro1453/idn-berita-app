@@ -1,20 +1,59 @@
-package id.idn.fahru.beritaapp.ui.main
+package id.idn.fahru.beritaapp.ui.main.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import id.idn.fahru.beritaapp.api.service.ServiceBuilder
+import id.idn.fahru.beritaapp.api.service.TopHeadlines
+import id.idn.fahru.beritaapp.helpers.LoadingState
+import id.idn.fahru.beritaapp.model.local.CountryNewsTag
+import id.idn.fahru.beritaapp.model.remote.ResponseNews
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import timber.log.Timber
 
-class SharedViewModel : ViewModel() {
-    private val _textDetail = MutableLiveData<String>().apply {
-        value = "This is Detail Fragment"
+class HomeViewModel() : ViewModel() {
+    private val topHeadlines = ServiceBuilder.buildService(TopHeadlines::class.java)
+    private val mapData = mutableMapOf<Int, MutableLiveData<CountryNewsTag>>()
+    private val _loadState = MutableLiveData<LoadingState>()
+    private val _errorMsg = MutableLiveData<String>()
+
+    fun fetchAPI(countryNewsTag: CountryNewsTag, position: Int) {
+        mapData[position] = MutableLiveData()
+        _loadState.value = LoadingState.LOADING
+        val call = topHeadlines.fetchHeadlines(countryNewsTag.country, countryNewsTag.newsTag)
+        call.enqueue(
+            object : Callback<ResponseNews> {
+                override fun onFailure(call: Call<ResponseNews>, t: Throwable) {
+                    Timber.e(t)
+                    _loadState.postValue(LoadingState.ERROR)
+                    _errorMsg.postValue("error: $t")
+                }
+
+                override fun onResponse(
+                    call: Call<ResponseNews>,
+                    response: Response<ResponseNews>
+                ) {
+                    response.body()?.run {
+                        articles?.let {
+                            countryNewsTag.listNews = it
+                            mapData[position]?.postValue(countryNewsTag)
+                            _loadState.postValue(LoadingState.SUCCESS)
+                        }
+                    }
+                }
+            }
+        )
     }
-    private val _textBookmark = MutableLiveData<String>().apply {
-        value = "This is Bookmark Fragment"
+
+    fun loadingState(): LiveData<LoadingState> = _loadState
+    fun errorMsg(): LiveData<String> = _errorMsg
+
+    fun resetData() {
+        mapData.clear()
     }
-    private val _textHome = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val textHome: LiveData<String> = _textHome
-    val textBookmark: LiveData<String> = _textBookmark
-    val textDetail: LiveData<String> = _textDetail
+
+    fun getData(position: Int): LiveData<CountryNewsTag> =
+        mapData[position] as LiveData<CountryNewsTag>
 }

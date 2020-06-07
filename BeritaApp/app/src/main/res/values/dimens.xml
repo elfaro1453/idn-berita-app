@@ -1,0 +1,10 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="imageTop_max_height">240dp</dimen>
+    <dimen name="imageSlide_max_height">120dp</dimen>
+    <dimen name="containerSlide_max_width">300dp</dimen>
+    <dimen name="containerSlide_max_height">250dp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
+</resources>

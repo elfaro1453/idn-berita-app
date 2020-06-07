@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Berita App</string>
+    <string name="title_home">Beranda</string>
+    <string name="title_bookmark">Penanda</string>
+    <string name="title_notifications">Notifikasi</string>
+    <string name="time_minute_ago">Menit Yang Lalu</string>
+    <string name="time_minutes_ago">Menit Yang Lalu</string>
+    <string name="time_hour_ago">Jam Yang Lalu</string>
+    <string name="time_hours_ago">Jam Yang Lalu</string>
+    <string name="view_more">Selengkapnya</string>
+    <string name="text_headlines">Tajuk Utama</string>
+</resources>

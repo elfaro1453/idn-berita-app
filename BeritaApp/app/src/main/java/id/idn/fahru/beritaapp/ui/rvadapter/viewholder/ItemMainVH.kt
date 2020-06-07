@@ -12,8 +12,9 @@ import id.idn.fahru.beritaapp.model.remote.ArticlesItem
 /**
  * Created by Imam Fahrur Rofi on 01/06/2020.
  */
-class ItemMain(private val binding: ItemMainBinding) :
+class ItemMainVH(private val binding: ItemMainBinding) :
     RecyclerView.ViewHolder(binding.root) {
+
     fun bind(item: ArticlesItem) {
         binding.run {
             textTitle.text = item.title?.crop(100)

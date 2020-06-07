@@ -3,38 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/btn_load_more"
+        app:layout_constraintBottom_toTopOf="@+id/include"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="1"
-        tools:listitem="@layout/item_rv_top_headline" />
+        tools:listitem="@layout/item_headline" />
 
     <include
-        android:id="@+id/btn_load_more"
-        layout="@layout/item_title_button_arrow"
+        android:id="@+id/include"
+        layout="@layout/item_more_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/rv_bottom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_top" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_load_more"
-        tools:itemCount="3"
-        tools:listitem="@layout/item_rv_main" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_top" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
