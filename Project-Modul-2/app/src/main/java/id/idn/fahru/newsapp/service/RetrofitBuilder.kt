@@ -6,6 +6,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Headers
 
 object RetrofitBuilder {
     private val client = OkHttpClient.Builder().build()
@@ -21,6 +22,7 @@ object RetrofitBuilder {
 
 interface TopHeadlines {
     // Replace YOUR_API_KEY with your api key from https://newsapi.org
-    @GET("/v2/top-headlines?country=id&apiKey=YOUR_API_KEY")
+    @Headers("Authorization: YOUR_API_KEY")
+    @GET("/v2/top-headlines?country=id")
     fun fetchHeadlines(): Call<ResponseNews>
 }
