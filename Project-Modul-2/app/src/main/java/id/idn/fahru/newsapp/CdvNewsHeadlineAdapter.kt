@@ -35,7 +35,6 @@ class CdvNewsHeadlineAdapter : RecyclerView.Adapter<CdvNewsHeadlineVH>() {
 
 class CdvNewsHeadlineVH(private val binding: CdvNewsHeadlineBinding) :
     RecyclerView.ViewHolder(binding.root) {
-
     fun bind(article: ArticlesItem) {
         binding.run {
             txtTitle.text = cropText(article.title ?: "Tidak Ada Judul")

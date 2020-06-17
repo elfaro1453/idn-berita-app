@@ -10,4 +10,12 @@
     <string name="time_hours_ago">Jam Yang Lalu</string>
     <string name="view_more">Selengkapnya</string>
     <string name="text_headlines">Tajuk Utama</string>
+    <string name="ssl_cert_not_trusted">Sertifikat tidak bisa dipercaya</string>
+    <string name="ssl_cert_expired">Sertifikat telah kadaluarsa</string>
+    <string name="ssl_cert_hostname_miss_match">Sertifikat tidak cocok</string>
+    <string name="ssl_cert_not_valid">Sertifikat tidak valid</string>
+    <string name="ssl_cert_error">Galat Sertifikat SSL</string>
+    <string name="do_you_continue">" Apakah anda tetap ingin melanjutkan ?"</string>
+    <string name="txt_continue">Lanjut</string>
+    <string name="txt_cancel">Batal</string>
 </resources>

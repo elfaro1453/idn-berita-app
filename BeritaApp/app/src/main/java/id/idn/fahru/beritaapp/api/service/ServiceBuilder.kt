@@ -27,11 +27,8 @@ object ServiceBuilder {
 internal class RequestInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
-        val originalUrl = originalRequest.url
-        val url = originalUrl.newBuilder()
-            .addQueryParameter("apiKey", BuildConfig.API_KEY)
-            .build()
-        val requestBuilder = originalRequest.newBuilder().url(url)
+        val requestBuilder = originalRequest.newBuilder()
+        requestBuilder.addHeader("Authorization", BuildConfig.API_KEY)
         val request = requestBuilder.build()
         return chain.proceed(request)
     }

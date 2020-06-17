@@ -1,5 +1,6 @@
 package id.idn.fahru.beritaapp.ui.rvadapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
@@ -12,6 +13,7 @@ import id.idn.fahru.beritaapp.R
 import id.idn.fahru.beritaapp.databinding.ItemHeadlineBinding
 import id.idn.fahru.beritaapp.helpers.RecyclerViewTypes
 import id.idn.fahru.beritaapp.model.remote.ArticlesItem
+import id.idn.fahru.beritaapp.ui.detail.DetailActivity
 import id.idn.fahru.beritaapp.ui.rvadapter.viewholder.ItemHeadlineVH
 import kotlin.math.min
 
@@ -44,6 +46,7 @@ class ItemHeadlineAdapter :
     override fun getItemCount() = min(listData.size, dataSize)
 
     override fun onBindViewHolder(holder: ItemHeadlineVH, position: Int) {
+        val articlesItem = listData[position]
         val imageParams = when (rvTypes) {
             RecyclerViewTypes.MAIN_TOP_HEADLINES ->
                 ConstraintLayout.LayoutParams(
@@ -69,7 +72,13 @@ class ItemHeadlineAdapter :
                 marginEnd = margin8dp
                 bottomMargin = margin8dp
             } else null
-        holder.bind(listData.get(position), imageParams, rootParams)
+        holder.bind(articlesItem, imageParams, rootParams)
+        holder.itemView.setOnClickListener {
+            val intent = Intent(it.context, DetailActivity::class.java).apply {
+                putExtra(DetailActivity.DETAIL_NEWS, articlesItem)
+            }
+            it.context.startActivity(intent)
+        }
     }
 
     override fun getItemId(position: Int): Long {

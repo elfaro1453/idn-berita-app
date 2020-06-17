@@ -1,10 +1,12 @@
 package id.idn.fahru.beritaapp.ui.rvadapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import id.idn.fahru.beritaapp.databinding.ItemMainBinding
 import id.idn.fahru.beritaapp.model.remote.ArticlesItem
+import id.idn.fahru.beritaapp.ui.detail.DetailActivity
 import id.idn.fahru.beritaapp.ui.rvadapter.viewholder.ItemMainVH
 import kotlin.math.min
 
@@ -29,7 +31,14 @@ class ItemMainAdapter(private val size: Int) : RecyclerView.Adapter<ItemMainVH>(
     override fun getItemCount() = min(listData.size, size)
 
     override fun onBindViewHolder(holder: ItemMainVH, position: Int) {
-        holder.bind(listData.get(position))
+        val articlesItem = listData.get(position)
+        holder.bind(articlesItem)
+        holder.itemView.setOnClickListener {
+            val intent = Intent(it.context, DetailActivity::class.java).apply {
+                putExtra(DetailActivity.DETAIL_NEWS, articlesItem)
+            }
+            it.context.startActivity(intent)
+        }
     }
 
     override fun getItemId(position: Int): Long {
