@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
     compileSdkVersion 29
@@ -83,8 +82,8 @@ dependencies {
     androidTestImplementation "androidx.navigation:navigation-testing:$navigation_version"
 
     // ViewModel
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$viewmodel_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$viewmodel_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$viewmodel_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewmodel_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$viewmodel_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$viewmodel_version"

@@ -71,10 +71,10 @@ class RvAdapter(private val viewModel: HomeViewModel, private val lifecycleOwner
             getData(position).observe(lifecycleOwner, Observer {
                 when (getItemViewType(position)) {
                     0 -> {
-                        (holder as ItemHeadlineMoreTopVH).bind(it)
+                        (holder as ItemHeadlineMoreTopVH).bind(it, position)
                     }
                     else -> {
-                        (holder as ItemMoreTopVH).bind(it)
+                        (holder as ItemMoreTopVH).bind(it, position)
                     }
                 }
             })

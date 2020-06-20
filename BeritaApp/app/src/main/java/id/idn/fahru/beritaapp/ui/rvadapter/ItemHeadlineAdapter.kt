@@ -13,7 +13,7 @@ import id.idn.fahru.beritaapp.R
 import id.idn.fahru.beritaapp.databinding.ItemHeadlineBinding
 import id.idn.fahru.beritaapp.helpers.RecyclerViewTypes
 import id.idn.fahru.beritaapp.model.remote.ArticlesItem
-import id.idn.fahru.beritaapp.ui.detail.DetailActivity
+import id.idn.fahru.beritaapp.ui.detailnews.DetailActivity
 import id.idn.fahru.beritaapp.ui.rvadapter.viewholder.ItemHeadlineVH
 import kotlin.math.min
 

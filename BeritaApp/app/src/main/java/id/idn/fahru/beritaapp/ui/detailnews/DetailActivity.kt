@@ -1,4 +1,4 @@
-package id.idn.fahru.beritaapp.ui.detail
+package id.idn.fahru.beritaapp.ui.detailnews
 
 import android.net.http.SslError
 import android.os.Bundle
