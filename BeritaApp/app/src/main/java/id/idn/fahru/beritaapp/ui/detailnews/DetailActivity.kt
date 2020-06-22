@@ -1,5 +1,6 @@
 package id.idn.fahru.beritaapp.ui.detailnews
 
+import android.annotation.SuppressLint
 import android.net.http.SslError
 import android.os.Bundle
 import android.webkit.SslErrorHandler
@@ -7,8 +8,6 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import coil.api.load
-import coil.size.Scale
 import id.idn.fahru.beritaapp.R
 import id.idn.fahru.beritaapp.databinding.ActivityDetailBinding
 import id.idn.fahru.beritaapp.model.remote.ArticlesItem
@@ -22,9 +21,9 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val myWebViewClient = MyWebViewClient()
         binding = ActivityDetailBinding.inflate(layoutInflater)
         val data = intent.getParcelableExtra(DETAIL_NEWS) as ArticlesItem
         binding.run {
@@ -32,14 +31,9 @@ class DetailActivity : AppCompatActivity() {
             setSupportActionBar(toolBar)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             title = data.title
-            imgToolbar.apply {
-                load(data.urlToImage) {
-                    scale(Scale.FILL)
-                }
-                contentDescription = data.description
-            }
             wbvDetail.apply {
-                webViewClient = myWebViewClient
+                webViewClient =
+                    MyWebViewClient(data.url.toString())
                 settings.apply {
                     javaScriptEnabled = true
                     userAgentString = resources.getString(R.string.user_agent)
@@ -47,24 +41,23 @@ class DetailActivity : AppCompatActivity() {
                     javaScriptCanOpenWindowsAutomatically = false
                     isVerticalScrollBarEnabled = true
                     defaultTextEncodingName = resources.getString(R.string.web_view_encode)
+                    loadWithOverviewMode = true
                 }
             }.run {
-                loadUrl(data.url)
+                loadUrl(data.url.toString())
             }
         }
     }
 
-    internal class MyWebViewClient : WebViewClient() {
+    internal class MyWebViewClient(urlDestination: String) : WebViewClient() {
 
-        private var urlDest: String? = null
+        private var urlSlug = urlDestination.substringAfterLast("/")
 
         override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-            url?.let {
-                if (urlDest.isNullOrEmpty() || it == urlDest) {
-                    urlDest = it
-                    view?.loadUrl(it)
-                }
+            if (url.toString().substringAfterLast("/") == urlSlug) {
+                urlSlug = url.toString()
             }
+            if (url.toString() == urlSlug) view?.loadUrl(url)
             return true
         }
 
@@ -79,7 +72,9 @@ class DetailActivity : AppCompatActivity() {
                     SslError.SSL_UNTRUSTED -> res.getString(R.string.ssl_cert_not_trusted)
                     SslError.SSL_EXPIRED -> res.getString(R.string.ssl_cert_expired)
                     SslError.SSL_IDMISMATCH -> res.getString(R.string.ssl_cert_hostname_miss_match)
-                    SslError.SSL_NOTYETVALID -> res.getString(R.string.ssl_cert_not_valid)
+                    SslError.SSL_NOTYETVALID -> res.getString(R.string.ssl_cert_not_yet_valid)
+                    SslError.SSL_INVALID -> res.getString(R.string.ssl_cert_not_valid)
+                    SslError.SSL_DATE_INVALID -> res.getString(R.string.ssl_cert_date_invalid)
                     else -> res.getString(R.string.ssl_cert_error)
                 }
                 message.plus(res.getString(R.string.ssl_cert_error))
@@ -95,7 +90,7 @@ class DetailActivity : AppCompatActivity() {
                         handler?.proceed()
                     }
                     setNegativeButton(
-                        res.getString(R.string.txt_continue).toUpperCase(Locale.getDefault())
+                        res.getString(R.string.txt_cancel).toUpperCase(Locale.getDefault())
                     ) { _, _ ->
                         handler?.cancel()
                     }

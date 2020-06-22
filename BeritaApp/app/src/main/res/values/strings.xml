@@ -3,6 +3,7 @@
     <string name="app_name">News App</string>
     <string name="title_home">Home</string>
     <string name="title_bookmark">Bookmark</string>
+    <string name="title_account">Bookmark</string>
     <string name="title_notifications">Notifications</string>
     <string name="time_minute_ago">Minute Ago</string>
     <string name="time_minutes_ago">Minutes Ago</string>
@@ -13,12 +14,13 @@
     <string name="ssl_cert_not_trusted">The certificate authority is not trusted.</string>
     <string name="ssl_cert_expired">The certificate has expired.</string>
     <string name="ssl_cert_hostname_miss_match">The certificate Hostname mismatch.</string>
-    <string name="ssl_cert_not_valid">The certificate is not yet valid.</string>
+    <string name="ssl_cert_not_yet_valid">The certificate is not yet valid.</string>
+    <string name="ssl_cert_not_valid">The certificate is not valid.</string>
+    <string name="ssl_cert_date_invalid">The certificate\'s date is invalid.</string>
     <string name="ssl_cert_error">SSL certificate error.</string>
     <string name="do_you_continue"> Do you want to continue anyway?</string>
     <string name="txt_continue">Continue</string>
     <string name="txt_cancel">Cancel</string>
     <string name="web_view_encode" translatable="false">utf-8</string>
     <string name="user_agent" translatable="false">Mozilla/5.0 (iPhone; CPU iPhone OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148</string>
-
 </resources>

@@ -18,4 +18,7 @@
     <string name="do_you_continue">" Apakah anda tetap ingin melanjutkan ?"</string>
     <string name="txt_continue">Lanjut</string>
     <string name="txt_cancel">Batal</string>
+    <string name="title_account">Akun</string>
+    <string name="ssl_cert_not_yet_valid">Sertifikat belum valid</string>
+    <string name="ssl_cert_date_invalid">Tanggal sertifikat tidak valid</string>
 </resources>

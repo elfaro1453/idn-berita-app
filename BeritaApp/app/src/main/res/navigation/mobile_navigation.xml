@@ -25,6 +25,13 @@
         android:name="id.idn.fahru.beritaapp.ui.main.bookmark.BookmarkFragment"
         android:label="@string/title_bookmark"
         tools:layout="@layout/fragment_bookmark" />
+
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="id.idn.fahru.beritaapp.ui.main.bookmark.BookmarkFragment"
+        android:label="@string/title_account"
+        tools:layout="@layout/fragment_bookmark" />
+
     <fragment
         android:id="@+id/listNewsFragment"
         android:name="id.idn.fahru.beritaapp.ui.main.listnews.ListNewsFragment"
