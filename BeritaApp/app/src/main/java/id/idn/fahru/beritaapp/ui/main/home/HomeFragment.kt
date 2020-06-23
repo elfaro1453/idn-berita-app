@@ -29,7 +29,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        adapterRv = RvAdapter(homeViewModel, requireActivity())
+        adapterRv = RvAdapter(homeViewModel, viewLifecycleOwner)
         placeHolderAdapter = PlaceHolderAdapter()
         placeHolderAdapter.loadState = LoadingState.LOADING
         val layoutInflater = LayoutInflater.from(this.context)
@@ -56,14 +56,14 @@ class HomeFragment : Fragment() {
                     homeViewModel.resetData()
                 }
                 homeViewModel.run {
-                    getListCountries().observe(requireActivity(), Observer {
+                    getListCountries().observe(viewLifecycleOwner, Observer {
                         adapterRv.addData(it)
                     })
-                    loadingState().observe(requireActivity(), Observer {
+                    loadingState().observe(viewLifecycleOwner, Observer {
                         placeHolderAdapter.loadState = it
                         isRefreshing = it == LoadingState.LOADING
                     })
-                    errorMsg().observe(requireActivity(), Observer {
+                    errorMsg().observe(viewLifecycleOwner, Observer {
                         Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
                     })
                 }
