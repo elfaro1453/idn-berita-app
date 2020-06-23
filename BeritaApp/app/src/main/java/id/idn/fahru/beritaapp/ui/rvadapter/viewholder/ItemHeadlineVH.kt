@@ -7,6 +7,7 @@ import coil.api.load
 import coil.size.Scale
 import id.idn.fahru.beritaapp.databinding.ItemHeadlineBinding
 import id.idn.fahru.beritaapp.helpers.DateTypes
+import id.idn.fahru.beritaapp.helpers.PlaceHolders
 import id.idn.fahru.beritaapp.helpers.crop
 import id.idn.fahru.beritaapp.helpers.toDate
 import id.idn.fahru.beritaapp.model.remote.ArticlesItem
@@ -33,8 +34,9 @@ class ItemHeadlineVH(private val binding: ItemHeadlineBinding) :
                 layoutParams = imageParams
                 load(item.urlToImage) {
                     scale(Scale.FILL)
+                    placeholder(PlaceHolders.shimmerDrawable)
                 }
-                contentDescription = item.title
+                contentDescription = item.description
             }
             item.publishedAt?.let {
                 textDate.text = it.toDate(DateTypes.LocalizedDate)

@@ -27,7 +27,7 @@ class RvAdapter(private val viewModel: HomeViewModel, private val lifecycleOwner
             clear()
             addAll(items)
         }
-        notifyDataSetChanged()
+        this.notifyDataSetChanged()
     }
 
     override fun getItemViewType(position: Int): Int {

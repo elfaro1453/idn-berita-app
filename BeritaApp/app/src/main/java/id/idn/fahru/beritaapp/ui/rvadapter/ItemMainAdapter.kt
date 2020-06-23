@@ -19,7 +19,7 @@ class ItemMainAdapter(private val size: Int) : RecyclerView.Adapter<ItemMainVH>(
     fun addData(items: List<ArticlesItem>) {
         listData.clear()
         listData.addAll(items)
-        notifyDataSetChanged()
+        this.notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemMainVH {

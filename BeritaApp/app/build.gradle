@@ -56,6 +56,9 @@ dependencies {
     // material
     api "com.google.android.material:material:$material_version"
 
+    // RecyclerView
+    implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
+
     // network
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
@@ -88,4 +91,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$viewmodel_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$viewmodel_version"
 
+    // Shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 }

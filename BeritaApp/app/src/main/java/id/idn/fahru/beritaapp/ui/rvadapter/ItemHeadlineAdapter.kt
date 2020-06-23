@@ -34,7 +34,7 @@ class ItemHeadlineAdapter :
             clear()
             addAll(items)
         }
-        notifyDataSetChanged()
+        this.notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHeadlineVH {

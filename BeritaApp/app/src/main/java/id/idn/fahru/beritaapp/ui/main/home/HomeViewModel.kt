@@ -27,7 +27,6 @@ class HomeViewModel : ViewModel() {
 
     fun fetchAPI(countryNewsTag: CountryNewsTag, position: Int) {
         mapData[position] = MutableLiveData()
-        _loadState.value = LoadingState.LOADING
         val call = topHeadlines.fetchHeadlines(countryNewsTag.country, countryNewsTag.newsTag)
         call.enqueue(
             object : Callback<ResponseNews> {
