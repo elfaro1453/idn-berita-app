@@ -9,7 +9,7 @@ import kotlin.random.Random
 fun <T : Enum<*>> Class<T>.randomEnum(): T {
     return if (this.enumConstants.isNullOrEmpty()) error("ENUM EMPTY") else {
         val i: Int = Random.nextInt(1, this.enumConstants!!.size)
-        this.enumConstants!!.get(i)
+        this.enumConstants!![i]
     }
 }
 
