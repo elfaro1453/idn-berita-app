@@ -5,7 +5,6 @@ import coil.api.load
 import coil.size.Scale
 import id.idn.fahru.beritaapp.databinding.ItemMainBinding
 import id.idn.fahru.beritaapp.helpers.DateTypes
-import id.idn.fahru.beritaapp.helpers.PlaceHolders
 import id.idn.fahru.beritaapp.helpers.crop
 import id.idn.fahru.beritaapp.helpers.toDate
 import id.idn.fahru.beritaapp.model.remote.ArticlesItem
@@ -22,7 +21,6 @@ class ItemMainVH(private val binding: ItemMainBinding) :
             imageRvMain.apply {
                 load(item.urlToImage) {
                     scale(Scale.FILL)
-                    placeholder(PlaceHolders.shimmerDrawable)
                 }
                 contentDescription = item.description
             }

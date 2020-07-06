@@ -23,19 +23,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/colorShimmer"
             tools:srcCompat="@tools:sample/avatars" />
-
-        <CheckBox
-            android:id="@+id/icon_starred"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/ic_baseline_star_24"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:padding="5dp"
-            app:buttonTint="@android:color/holo_blue_bright"
-            app:layout_constraintBottom_toBottomOf="@+id/image_rv_top_headline"
-            app:layout_constraintRight_toRightOf="parent" />
 
         <TextView
             android:id="@+id/text_title"

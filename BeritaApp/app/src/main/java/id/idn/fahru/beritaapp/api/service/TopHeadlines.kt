@@ -1,7 +1,7 @@
 package id.idn.fahru.beritaapp.api.service
 
 import id.idn.fahru.beritaapp.model.remote.ResponseNews
-import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -10,8 +10,8 @@ import retrofit2.http.Query
  */
 interface TopHeadlines {
     @GET("/v2/top-headlines")
-    fun fetchHeadlines(
+    suspend fun fetchHeadlines(
         @Query("country") country: String,
         @Query("category") category: String
-    ): Call<ResponseNews>
+    ): Response<ResponseNews>
 }

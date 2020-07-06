@@ -67,8 +67,8 @@ class RvAdapter(private val viewModel: HomeViewModel, private val lifecycleOwner
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         viewModel.run {
-            fetchAPI(listDataCountry[position], position)
-            getData(position).observe(lifecycleOwner, Observer {
+            fetchAPI(position, listDataCountry[position])
+            getCountryNewsTag(position).observe(lifecycleOwner, Observer {
                 when (getItemViewType(position)) {
                     0 -> {
                         (holder as ItemHeadlineMoreTopVH).bind(it, position)

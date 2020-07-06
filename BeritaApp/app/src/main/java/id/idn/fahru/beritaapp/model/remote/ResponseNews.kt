@@ -1,7 +1,10 @@
 package id.idn.fahru.beritaapp.model.remote
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -17,6 +20,7 @@ data class ResponseNews(
     val status: String? = null
 ) : Parcelable
 
+@Entity(tableName = "articlesitem_table")
 @Parcelize
 data class ArticlesItem(
 
@@ -32,9 +36,6 @@ data class ArticlesItem(
     @field:SerializedName("description")
     val description: String? = null,
 
-    @field:SerializedName("source")
-    val source: Source? = null,
-
     @field:SerializedName("title")
     val title: String? = null,
 
@@ -43,7 +44,11 @@ data class ArticlesItem(
 
     @field:SerializedName("content")
     val content: String? = null
-) : Parcelable
+) : Parcelable {
+    @IgnoredOnParcel
+    @PrimaryKey(autoGenerate = true)
+    var newsID: Int? = null
+}
 
 @Parcelize
 data class Source(
