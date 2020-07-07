@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:contentInsetStartWithNavigation="0dp"
+            android:background="@color/colorWhite"
             app:layout_scrollFlags="noScroll"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 

@@ -25,4 +25,6 @@
     <string name="change_language_settings">Change Language Settings</string>
     <string name="user_agent" translatable="false">Mozilla/5.0 (iPhone; CPU iPhone OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148</string>
     <string name="refresh_home">Refresh</string>
+    <string name="bookmark">Bookmark</string>
+    <string name="no_article">There is no articles</string>
 </resources>

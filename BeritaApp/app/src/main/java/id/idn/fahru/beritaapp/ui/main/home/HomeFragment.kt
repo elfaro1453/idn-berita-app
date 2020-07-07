@@ -9,27 +9,29 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.api.load
 import coil.size.Scale
 import id.idn.fahru.beritaapp.R
-import id.idn.fahru.beritaapp.databinding.FragmentHomeBinding
+import id.idn.fahru.beritaapp.databinding.HomeFragmentBinding
 import id.idn.fahru.beritaapp.helpers.LoadingState
 import id.idn.fahru.beritaapp.ui.rvadapter.PlaceHolderAdapter
 import id.idn.fahru.beritaapp.ui.rvadapter.RvAdapter
+import kotlinx.coroutines.delay
 
 class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by activityViewModels()
-    private lateinit var binding: FragmentHomeBinding
+    private lateinit var binding: HomeFragmentBinding
     private lateinit var adapterRv: RvAdapter
     private lateinit var placeHolderAdapter: PlaceHolderAdapter
     private lateinit var adapterMerged: ConcatAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homeViewModel.resetData()
+        if (savedInstanceState == null) homeViewModel.resetData()
     }
 
     override fun onCreateView(
@@ -37,8 +39,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val layoutInflater = LayoutInflater.from(this.context)
-        binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+        binding = HomeFragmentBinding.inflate(inflater, container, false)
         placeHolderAdapter = PlaceHolderAdapter()
         placeHolderAdapter.loadState = LoadingState.LOADING
         adapterRv = RvAdapter(homeViewModel, viewLifecycleOwner)
@@ -75,7 +76,10 @@ class HomeFragment : Fragment() {
                         adapterRv.addData(it)
                     })
                     loadingState.observe(viewLifecycleOwner, Observer {
-                        placeHolderAdapter.loadState = it
+                        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                            delay(1000)
+                            placeHolderAdapter.loadState = it
+                        }
                         isRefreshing = it == LoadingState.LOADING
                     })
                     errorMsg.observe(viewLifecycleOwner, Observer {
@@ -98,6 +102,7 @@ class HomeFragment : Fragment() {
                 startActivity(mIntent)
             }
             R.id.action_refresh -> {
+                binding.swipeContainer.isRefreshing = true
                 placeHolderAdapter.loadState = LoadingState.LOADING
                 homeViewModel.resetData()
             }

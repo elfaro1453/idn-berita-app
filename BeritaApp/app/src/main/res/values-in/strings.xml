@@ -23,4 +23,6 @@
     <string name="ssl_cert_date_invalid">Tanggal sertifikat tidak valid</string>
     <string name="change_language_settings">Ubah Bahasa</string>
     <string name="refresh_home">Refresh</string>
+    <string name="bookmark">Tandai</string>
+    <string name="no_article">Tidak Ada Artikel</string>
 </resources>

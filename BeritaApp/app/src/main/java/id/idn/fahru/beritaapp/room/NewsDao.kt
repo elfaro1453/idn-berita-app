@@ -1,7 +1,10 @@
 package id.idn.fahru.beritaapp.room
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import id.idn.fahru.beritaapp.model.remote.ArticlesItem
 
 /**
@@ -13,8 +16,8 @@ interface NewsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(articlesItem: ArticlesItem): Long
 
-    @Delete
-    suspend fun delete(articlesItem: ArticlesItem)
+    @Query("DELETE FROM articlesitem_table WHERE url = :url")
+    suspend fun delete(url: String)
 
     @Query("DELETE FROM articlesitem_table")
     suspend fun deleteAll()

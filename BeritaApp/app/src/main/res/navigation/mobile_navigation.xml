@@ -9,7 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="id.idn.fahru.beritaapp.ui.main.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home">
+        tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_navigation_home_to_listNewsFragment"
             app:destination="@id/listNewsFragment"
@@ -24,13 +24,13 @@
         android:id="@+id/navigation_bookmark"
         android:name="id.idn.fahru.beritaapp.ui.main.bookmark.BookmarkFragment"
         android:label="@string/title_bookmark"
-        tools:layout="@layout/fragment_bookmark" />
+        tools:layout="@layout/bookmark_fragment" />
 
     <fragment
         android:id="@+id/navigation_account"
-        android:name="id.idn.fahru.beritaapp.ui.main.bookmark.BookmarkFragment"
+        android:name="id.idn.fahru.beritaapp.ui.main.account.AccountFragment"
         android:label="@string/title_account"
-        tools:layout="@layout/fragment_bookmark" />
+        tools:layout="@layout/account_fragment" />
 
     <fragment
         android:id="@+id/listNewsFragment"

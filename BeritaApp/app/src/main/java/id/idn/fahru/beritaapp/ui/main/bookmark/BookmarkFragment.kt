@@ -4,32 +4,53 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import id.idn.fahru.beritaapp.databinding.FragmentBookmarkBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import id.idn.fahru.beritaapp.R
+import id.idn.fahru.beritaapp.databinding.BookmarkFragmentBinding
+import id.idn.fahru.beritaapp.ui.rvadapter.ItemMainAdapter
 
 class BookmarkFragment : Fragment() {
 
-    private lateinit var bookmarkViewModel: BookmarkViewModel
-    private lateinit var fragmentBookmarkBinding: FragmentBookmarkBinding
+    private val bookmarkViewModel: BookmarkViewModel by activityViewModels()
+    private lateinit var binding: BookmarkFragmentBinding
+    private lateinit var itemMainAdapter: ItemMainAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        bookmarkViewModel =
-            ViewModelProvider(this).get(BookmarkViewModel::class.java)
-        fragmentBookmarkBinding = FragmentBookmarkBinding.inflate(layoutInflater, container, false)
-
-        bookmarkViewModel.textBookmark.observe(viewLifecycleOwner, Observer {
-            fragmentBookmarkBinding.textBookmark.text = it
-        })
-
-        fragmentBookmarkBinding.buttonBookmark.setOnClickListener {
-
+        binding = BookmarkFragmentBinding.inflate(inflater, container, false)
+        (activity as AppCompatActivity).run {
+            setSupportActionBar(binding.homeToolbar)
+            supportActionBar?.title = this.resources.getString(R.string.title_bookmark)
         }
-        return fragmentBookmarkBinding.root
+        itemMainAdapter = ItemMainAdapter(Int.MAX_VALUE)
+        itemMainAdapter.stateRestorationPolicy =
+            RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        binding.run {
+            setHasOptionsMenu(true)
+            rvBookmark.apply {
+                setHasFixedSize(true)
+                layoutManager = LinearLayoutManager(context)
+                adapter = itemMainAdapter
+            }
+        }
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        bookmarkViewModel.bookmarkedArticle.observe(viewLifecycleOwner, Observer {
+            binding.txtWarning.run {
+                if (it.isNullOrEmpty()) visibility = View.VISIBLE else visibility = View.GONE
+            }
+            itemMainAdapter.addData(it)
+        })
     }
 }
