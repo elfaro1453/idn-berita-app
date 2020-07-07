@@ -1,11 +1,13 @@
 package id.idn.fahru.beritaapp.ui.detailnews
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.net.http.SslError
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.webkit.SslErrorHandler
@@ -127,7 +129,7 @@ class DetailActivity : AppCompatActivity() {
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         val bookmarkButton: MenuItem? = menu?.findItem(R.id.action_bookmark)
         var tintColor = Color.DKGRAY
-        if (statusBookmark) tintColor = Color.BLUE
+        if (statusBookmark) tintColor = Color.GREEN
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             bookmarkButton?.icon?.setTint(tintColor)
         } else {
@@ -149,6 +151,10 @@ class DetailActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+        if (item.itemId == R.id.action_change_settings) {
+            val mIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+            startActivity(mIntent)
         }
         return super.onOptionsItemSelected(item)
     }

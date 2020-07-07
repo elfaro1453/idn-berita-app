@@ -13,8 +13,4 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Dark" />
 
-    <style name="Widget.CheckBox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
-        <item name="android:paddingEnd">0dp</item>
-    </style>
-
 </resources>
