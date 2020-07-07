@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.api.load
 import coil.size.Scale
@@ -20,6 +19,7 @@ import id.idn.fahru.beritaapp.helpers.LoadingState
 import id.idn.fahru.beritaapp.ui.rvadapter.PlaceHolderAdapter
 import id.idn.fahru.beritaapp.ui.rvadapter.RvAdapter
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -27,7 +27,6 @@ class HomeFragment : Fragment() {
     private lateinit var binding: HomeFragmentBinding
     private lateinit var adapterRv: RvAdapter
     private lateinit var placeHolderAdapter: PlaceHolderAdapter
-    private lateinit var adapterMerged: ConcatAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,13 +40,16 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = HomeFragmentBinding.inflate(inflater, container, false)
         placeHolderAdapter = PlaceHolderAdapter()
-        placeHolderAdapter.loadState = LoadingState.LOADING
         adapterRv = RvAdapter(homeViewModel, viewLifecycleOwner)
-        adapterMerged = ConcatAdapter(placeHolderAdapter, adapterRv)
         binding.run {
             setHasOptionsMenu(true)
+            rvPlaceholder.run {
+                adapter = placeHolderAdapter
+                setHasFixedSize(true)
+                layoutManager = LinearLayoutManager(context)
+            }
             homeRv.run {
-                adapter = adapterMerged
+                adapter = adapterRv
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(context)
             }
@@ -64,29 +66,29 @@ class HomeFragment : Fragment() {
             setSupportActionBar(binding.homeToolbar)
             supportActionBar?.setDisplayShowTitleEnabled(false)
         }
-        binding.run {
-            swipeContainer.apply {
-                isRefreshing = true
-                setOnRefreshListener {
-                    placeHolderAdapter.loadState = LoadingState.LOADING
-                    homeViewModel.resetData()
-                }
-                homeViewModel.run {
-                    getListCountries.observe(viewLifecycleOwner, Observer {
-                        adapterRv.addData(it)
-                    })
-                    loadingState.observe(viewLifecycleOwner, Observer {
-                        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-                            delay(1000)
-                            placeHolderAdapter.loadState = it
-                        }
-                        isRefreshing = it == LoadingState.LOADING
-                    })
-                    errorMsg.observe(viewLifecycleOwner, Observer {
-                        Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-                    })
-                }
+        binding.swipeContainer.apply {
+            isRefreshing = true
+            itemLoading()
+            setOnRefreshListener {
+                itemLoading()
+                homeViewModel.resetData()
             }
+        }
+        homeViewModel.run {
+            getListCountries.observe(viewLifecycleOwner, Observer {
+                adapterRv.addData(it)
+            })
+            loadingState.observe(viewLifecycleOwner, Observer {
+                binding.swipeContainer.isRefreshing = it == LoadingState.LOADING
+                if (it == LoadingState.SUCCESS)
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        delay(1000)
+                        itemLoaded()
+                    }
+            })
+            errorMsg.observe(viewLifecycleOwner, Observer {
+                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            })
         }
     }
 
@@ -102,11 +104,20 @@ class HomeFragment : Fragment() {
                 startActivity(mIntent)
             }
             R.id.action_refresh -> {
-                binding.swipeContainer.isRefreshing = true
-                placeHolderAdapter.loadState = LoadingState.LOADING
+                itemLoading()
                 homeViewModel.resetData()
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun itemLoading() {
+        binding.homeRv.visibility = View.INVISIBLE
+        binding.rvPlaceholder.visibility = View.VISIBLE
+    }
+
+    private fun itemLoaded() {
+        binding.homeRv.visibility = View.VISIBLE
+        binding.rvPlaceholder.visibility = View.GONE
     }
 }

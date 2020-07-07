@@ -20,9 +20,9 @@ class HomeViewModel : ViewModel() {
     private val _loadState = MutableLiveData<LoadingState>()
     private val _errorMsg = MutableLiveData<String>()
 
-    val loadingState: LiveData<LoadingState> = _loadState
-    val errorMsg: LiveData<String> = _errorMsg
-    val getListCountries: LiveData<List<CountryNewsTag>> = listCountryNewsTag
+    val loadingState = _loadState
+    val errorMsg = _errorMsg
+    val getListCountries = listCountryNewsTag
 
     fun fetchAPI(position: Int, countryNewsTag: CountryNewsTag) {
         mapData[position] = MutableLiveData()
@@ -55,6 +55,7 @@ class HomeViewModel : ViewModel() {
         listCountryNewsTag.postValue(dataCountries)
     }
 
-    fun getCountryNewsTag(position: Int): LiveData<CountryNewsTag> =
-        mapData[position]!!
+    fun getCountryNewsTag(position: Int): LiveData<CountryNewsTag> {
+        return mapData[position] as LiveData<CountryNewsTag>
+    }
 }

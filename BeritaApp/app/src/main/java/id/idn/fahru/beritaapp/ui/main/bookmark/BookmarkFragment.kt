@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import id.idn.fahru.beritaapp.R
 import id.idn.fahru.beritaapp.databinding.BookmarkFragmentBinding
 import id.idn.fahru.beritaapp.ui.rvadapter.ItemMainAdapter
@@ -31,8 +30,6 @@ class BookmarkFragment : Fragment() {
             supportActionBar?.title = this.resources.getString(R.string.title_bookmark)
         }
         itemMainAdapter = ItemMainAdapter(Int.MAX_VALUE)
-        itemMainAdapter.stateRestorationPolicy =
-            RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         binding.run {
             setHasOptionsMenu(true)
             rvBookmark.apply {

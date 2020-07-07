@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.webkit.SslErrorHandler
+import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AlertDialog
@@ -41,6 +42,7 @@ class DetailActivity : AppCompatActivity() {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             title = data?.title
             wbvDetail.apply {
+                webChromeClient = MyChromeClient()
                 webViewClient =
                     MyWebViewClient(data?.url.toString())
                 settings.apply {
@@ -65,15 +67,16 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    internal class MyChromeClient : WebChromeClient()
+
     internal class MyWebViewClient(urlDestination: String) : WebViewClient() {
 
         private var urlSlug = urlDestination.substringAfterLast("/")
 
         override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-            if (url.toString().substringAfterLast("/") == urlSlug) {
-                urlSlug = url.toString()
+            if (url!!.substringAfterLast("/") == urlSlug) {
+                view?.loadUrl(url)
             }
-            if (url.toString() == urlSlug) view?.loadUrl(url)
             return true
         }
 
