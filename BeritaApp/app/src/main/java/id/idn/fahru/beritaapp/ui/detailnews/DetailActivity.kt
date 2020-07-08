@@ -49,7 +49,6 @@ class DetailActivity : AppCompatActivity() {
                     MyWebViewClient(data?.url.toString())
                 settings.apply {
                     javaScriptEnabled = true
-                    userAgentString = resources.getString(R.string.user_agent)
                     loadsImagesAutomatically = true
                     javaScriptCanOpenWindowsAutomatically = false
                     isVerticalScrollBarEnabled = true
