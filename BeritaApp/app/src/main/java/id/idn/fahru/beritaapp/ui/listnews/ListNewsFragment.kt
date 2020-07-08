@@ -1,4 +1,4 @@
-package id.idn.fahru.beritaapp.ui.main.listnews
+package id.idn.fahru.beritaapp.ui.listnews
 
 import android.os.Bundle
 import android.view.LayoutInflater

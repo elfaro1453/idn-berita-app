@@ -34,7 +34,7 @@
 
     <fragment
         android:id="@+id/listNewsFragment"
-        android:name="id.idn.fahru.beritaapp.ui.main.listnews.ListNewsFragment"
+        android:name="id.idn.fahru.beritaapp.ui.listnews.ListNewsFragment"
         android:label="list_news_fragment"
         tools:layout="@layout/list_news_fragment" />
 </navigation>
