@@ -11,10 +11,6 @@ import kotlin.math.roundToLong
  * Created by Imam Fahrur Rofi on 03/06/2020.
  */
 
-enum class DateTypes {
-    RelativeDate, LocalizedDate
-}
-
 fun String.toDate(dateTypes: DateTypes): String {
     val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
     inputFormat.timeZone = TimeZone.getTimeZone("GMT")
@@ -38,18 +34,6 @@ fun String.toDate(dateTypes: DateTypes): String {
             }
         } else {
             date?.let { outputFormat.format(it) } ?: ""
-//                val days = (diff / (24.0 * 60 * 60 * 1000)).roundToLong()
-//                when {
-//                    days == 0L -> "today"
-//                    days == 1L -> "yesterday"
-//                    days < 14 -> "$days days ago"
-//                    days < 30 -> (days / 7).toInt()
-//                        .toString() + " weeks ago"
-//                    days < 365 -> (days / 30).toInt()
-//                        .toString() + " months ago"
-//                    else -> (days / 365).toInt()
-//                        .toString() + " years ago"
-//                }
         }
     } catch (e: ParseException) {
         e.printStackTrace()
@@ -59,4 +43,8 @@ fun String.toDate(dateTypes: DateTypes): String {
 
 fun String.crop(length: Int): String {
     return this.take(length) + if (this.length > length) "..." else ""
+}
+
+enum class DateTypes {
+    RelativeDate, LocalizedDate
 }
