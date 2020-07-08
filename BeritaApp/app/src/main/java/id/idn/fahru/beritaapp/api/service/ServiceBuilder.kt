@@ -1,11 +1,14 @@
 package id.idn.fahru.beritaapp.api.service
 
 import id.idn.fahru.beritaapp.BuildConfig
+import id.idn.fahru.beritaapp.model.remote.ResponseNews
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 /**
  * Created by Imam Fahrur Rofi on 29/05/2020.
@@ -32,4 +35,12 @@ class RequestInterceptor : Interceptor {
         val request = requestBuilder.build()
         return chain.proceed(request)
     }
+}
+
+interface TopHeadlines {
+    @GET("/v2/top-headlines")
+    suspend fun fetchHeadlines(
+        @Query("country") country: String,
+        @Query("category") category: String
+    ): retrofit2.Response<ResponseNews>
 }
