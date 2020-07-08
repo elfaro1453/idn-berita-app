@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/homeFragment">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/homeFragment"
         android:name="id.idn.fahru.beritaapp.ui.main.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="home_fragment"
         tools:layout="@layout/home_fragment">
         <action
-            android:id="@+id/action_navigation_home_to_listNewsFragment"
+            android:id="@+id/action_homeFragment_to_listNewsFragment"
             app:destination="@id/listNewsFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
@@ -21,20 +21,18 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_bookmark"
-        android:name="id.idn.fahru.beritaapp.ui.main.bookmark.BookmarkFragment"
-        android:label="@string/title_bookmark"
-        tools:layout="@layout/bookmark_fragment" />
-
-    <fragment
-        android:id="@+id/navigation_account"
-        android:name="id.idn.fahru.beritaapp.ui.main.account.AccountFragment"
-        android:label="@string/title_account"
-        tools:layout="@layout/account_fragment" />
-
-    <fragment
         android:id="@+id/listNewsFragment"
         android:name="id.idn.fahru.beritaapp.ui.listnews.ListNewsFragment"
         android:label="list_news_fragment"
         tools:layout="@layout/list_news_fragment" />
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="id.idn.fahru.beritaapp.ui.main.account.AccountFragment"
+        android:label="account_fragment"
+        tools:layout="@layout/account_fragment" />
+    <fragment
+        android:id="@+id/bookmarkFragment"
+        android:name="id.idn.fahru.beritaapp.ui.main.bookmark.BookmarkFragment"
+        android:label="bookmark_fragment"
+        tools:layout="@layout/bookmark_fragment" />
 </navigation>

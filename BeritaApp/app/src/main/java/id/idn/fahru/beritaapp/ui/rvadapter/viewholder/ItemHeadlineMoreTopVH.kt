@@ -71,7 +71,7 @@ class ItemHeadlineMoreTopVH(binding: ItemHeadlineMoreTopBinding) :
         btnMore.root.visibility = View.VISIBLE
         btnMore.buttonMore.setOnClickListener {
             val bundle = bundleOf("position" to position)
-            it.findNavController().navigate(R.id.action_navigation_home_to_listNewsFragment, bundle)
+            it.findNavController().navigate(R.id.action_homeFragment_to_listNewsFragment, bundle)
         }
     }
 }

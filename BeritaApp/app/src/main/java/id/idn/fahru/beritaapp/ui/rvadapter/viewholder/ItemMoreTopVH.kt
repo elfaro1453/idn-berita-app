@@ -35,7 +35,7 @@ class ItemMoreTopVH(
             buttonMore.setOnClickListener {
                 val bundle = bundleOf("position" to position)
                 it.findNavController()
-                    .navigate(R.id.action_navigation_home_to_listNewsFragment, bundle)
+                    .navigate(R.id.action_homeFragment_to_listNewsFragment, bundle)
             }
         }
         recyclerView.run {
