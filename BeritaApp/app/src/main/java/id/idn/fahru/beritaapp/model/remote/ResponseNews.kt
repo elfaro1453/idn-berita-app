@@ -49,10 +49,3 @@ data class ArticlesItem(
     @PrimaryKey(autoGenerate = true)
     var newsID: Int? = null
 }
-
-@Parcelize
-data class Source(
-
-    @field:SerializedName("name")
-    val name: String? = null
-) : Parcelable
